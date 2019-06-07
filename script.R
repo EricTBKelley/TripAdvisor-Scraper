@@ -18,7 +18,7 @@ TripAdvisorReviews <- function(hotelUrl) {
       html_text() %>% 
       as.numeric()
       
-  for(x in 1:2){
+  for(x in 1:iterations){
     if (!x == 1) {
       num <- as.character((x * 5) - 5)
       split.url <- str_split(url, "-Reviews-", simplify = T) %>% as.vector()
