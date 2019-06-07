@@ -6,6 +6,7 @@
 library(rvest)
 library(xlsx)
 library(dplyr)
+library(stringr)
 TripAdvisorReviews <- function(hotelUrl) {
   
   url <- hotelUrl
@@ -17,10 +18,11 @@ TripAdvisorReviews <- function(hotelUrl) {
       html_text() %>% 
       as.numeric()
       
-  for(x in 1:iterations){
+  for(x in 1:2){
     if (!x == 1) {
       num <- as.character((x * 5) - 5)
-      url <- paste0("http://www.tripadvisor.com/Hotel_Review-g37209-d1762915-Reviews-or", num, "-JW_Marriott_Indianapolis-Indianapolis_Indiana.html")
+      split.url <- str_split(url, "-Reviews-", simplify = T) %>% as.vector()
+      url <- paste0(split.url[1], "-Reviews-or", num, "-", split.url[2])
     }
     print(url)
     
